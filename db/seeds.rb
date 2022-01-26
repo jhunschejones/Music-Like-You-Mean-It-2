@@ -12,9 +12,9 @@
 #
 User.destroy_all
 User.create(
-  name: "Josh Jones",
-  email: ENV["EMAIL_USERNAME"],
-  password: ENV["DEV_PASSWORD"],
-  password_confirmation: ENV["DEV_PASSWORD"],
-  site_role: "admin"
+  name: ENV["DEV_USER_NAME"],
+  email: ENV["DEV_USER_EMAIL"],
+  password: ENV["DEV_USER_PASSWORD"],
+  password_confirmation: ENV["DEV_USER_PASSWORD"],
+  site_role: User::SITE_ADMIN
 )
