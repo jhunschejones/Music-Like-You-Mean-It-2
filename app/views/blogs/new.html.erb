@@ -1,0 +1,48 @@
+<div class="new-blog">
+  <div class="new-blog-form-container">
+    <h2 class="title is-4">New blog</h2>
+
+    <%= form_with(model: @blog, url: blogs_path) do |f| %>
+      <div class="field">
+        <%= f.label :title %>
+        <%= f.text_field :title, autocomplete: 'off', class: "input" %>
+      </div>
+
+      <div class="field">
+        <%= f.label :content %><br />
+        <%= f.rich_text_area :content %>
+      </div>
+
+      <div class="field">
+        <%= f.label :embedded_video %>
+        <%= f.text_area :embedded_video, autocomplete: 'off', class: "textarea" %>
+      </div>
+
+      <div class="field">
+        <%= f.label :published_at %><br />
+        <%= f.datetime_select :published_at, ampm: true, use_short_month: true, order: [:month, :day, :year], minute_step: 10, start_year: 1.year.ago.year %>
+        <small class="has-text-grey-light">(USA Pacific Time)</small>
+      </div>
+
+      <div class="field">
+        <%= f.label :named_url %>
+        <%= f.text_field :named_url, autocomplete: 'off', class: "input" %>
+      </div>
+
+      <div class="field">
+        <%= f.label :blog_tags %>
+        <%= f.text_field :blog_tags, autocomplete: 'off', class: "input" %>
+      </div>
+
+      <div class="field">
+        <%= f.label "Save as draft" %>
+        <%= f.check_box :is_draft %>
+      </div>
+
+      <div class="actions">
+        <%= f.submit "Create", class: "button is-info" %>
+        <%= link_to "Back", blogs_path, class: "button is-info is-outlined" %>
+      </div>
+    <% end %>
+  </div>
+</div>

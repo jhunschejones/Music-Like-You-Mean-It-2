@@ -1,0 +1,29 @@
+<div class="all-emails">
+  <div class="all-emails-container">
+    <h2 class="title is-4">All emails</h1>
+    <%= button_to(send_daily_email_emails_path, method: :post, data: { confirm: "This will send an email to every user. Are you sure that's what you intended to do?", disable_with: "<i class='fas fa-spinner fa-spin'></i><span>Send<span class=\"large-screen-description\">&nbsp;daily email</span></span>" }, class: "button is-info is-pulled-right is-small send-daily-email-button") do %>
+      <span class="icon is-small">
+        <i class="fas fa-paper-plane"></i>
+      </span>
+      <span>Send<span class="large-screen-description">&nbsp;daily email</span></span>
+    <% end %>
+    <%= link_to(new_email_path, class: "button is-info is-pulled-right is-small new-email-button") do %>
+      <span class="icon is-small">
+        <i class="fas fa-pen"></i>
+      </span>
+      <span>New<span class="large-screen-description">&nbsp;email</span></span>
+    <% end %>
+    <table class="table is-fullwidth is-hoverable">
+      <thead>
+        <tr>
+          <th>Subject</th>
+          <th>Sent</th>
+          <th>Edit</th>
+        </tr>
+      </thead>
+      <tbody>
+        <%= render(partial: 'emails/email', collection: @emails, cached: true) %>
+      </tbody>
+    </table>
+  </div>
+</div>

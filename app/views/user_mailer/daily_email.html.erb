@@ -1,0 +1,14 @@
+<div>
+  Hi <%= @user.name %>,
+  <br/><br/>
+</div>
+<div>
+  <%= @email.body %>
+</div>
+<% if @email.cta_link.present? && @email.cta_text.present? %>
+  <table align='center' class="cta-container">
+    <td>
+      <%= link_to(@email.cta_text, @email.cta_link, target: :_blank, class: "cta-button") %>
+    </td>
+  </table>
+<% end %>

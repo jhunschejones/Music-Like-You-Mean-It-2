@@ -1,0 +1,31 @@
+<div class="all-users">
+  <div class="all-users-container">
+    <h2 class="title is-4">All site users</h1>
+    <%= link_to(new_user_path, class: "button is-info is-pulled-right is-small new-user-button") do %>
+      <span class="icon is-small">
+        <i class="fas fa-pen"></i>
+      </span>
+      <span>Add a user</span>
+    <% end %>
+    <p class="has-text-grey-light users-total">Total: <%= @users.size %></p>
+    <table class="table is-fullwidth is-hoverable">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Joined</th>
+          <th class="views-column-sm">
+            <span class="icon is-small">
+              <i class="far fa-eye"></i>
+            </span>
+          </th>
+          <th class="views-column-lg">Workshop views</th>
+          <th class="delete-user-header">Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        <%= render(partial: 'users/user', collection: @users, cached: true) %>
+      </tbody>
+    </table>
+  </div>
+</div>

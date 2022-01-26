@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Music Like You Mean It</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+    <%= favicon_link_tag asset_path("favicon.ico") %>
+  </head>
+
+  <body>
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
+        <a class="navbar-item" href="/workshop">
+          <%= image_tag("logo.jpg", height: "28", class: "site-logo-image") %>
+        </a>
+
+        <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
+
+      <div class="navbar-menu main-nav-menu">
+        <div class="navbar-start">
+        </div>
+
+        <div class="navbar-end">
+          <% if @current_user&.can_manage_emails? %>
+            <%= link_to("Emails", emails_path, class: "navbar-item") %>
+          <% end %>
+          <% if @current_user&.can_manage_users? %>
+            <%= link_to("Users", users_path, class: "navbar-item") %>
+          <% end %>
+          <%= link_to("About", pages_about_path, class: "navbar-item") %>
+          <%= link_to("Blog", blogs_path, class: "navbar-item") %>
+          <%= link_to("Workshop", workshop_path, class: "navbar-item") %>
+          <% if @current_user&.is_admin? %>
+            <%= link_to("Log out", logout_path, method: :delete, class: "navbar-item has-text-danger") %>
+          <% end %>
+        </div>
+      </div>
+    </nav>
+
+    <% if flash[:alert] %>
+      <div class="flash notification is-danger">
+        <button class="delete"></button>
+        <p class="notice"><%= flash[:alert] %></p>
+      </div>
+    <% elsif flash[:notice] %>
+      <div class="flash notification is-warning">
+        <button class="delete"></button>
+        <p class="notice"><%= flash[:notice] %></p>
+      </div>
+    <% elsif flash[:success] %>
+      <div class="flash notification is-success">
+        <button class="delete"></button>
+        <p class="notice"><%= flash[:success] %></p>
+      </div>
+    <% end %>
+
+    <div class="page-container"><%= yield %></div>
+
+    <footer class="footer columns">
+      <div class="column is-four-fifths-desktop is-two-thirds-tablet">
+        <span>&copy; <%= Time.now.year %> Music Like You Mean It</span>
+      </div>
+      <div class="column">
+        <%= link_to("Terms", pages_terms_path, class: "footer-link") %>
+        <%= link_to("Privacy", pages_privacy_policy_path, class: "footer-link") %>
+      </div>
+    </footer>
+  </body>
+</html>

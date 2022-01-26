@@ -1,0 +1,55 @@
+<div class="blog-details">
+  <div class="blog-container">
+    <div class="blog">
+      <% if @current_user&.can_manage_blogs? && @blog.is_draft? %>
+        <p class="tag is-danger is-pulled-right">DRAFT</p>
+      <% end %>
+      <h2 class="blog-title title is-1"><%= @blog.title %></h2>
+      <% if @current_user&.can_manage_blogs? %>
+        <div class="edit-blog-link">
+          <%= link_to(edit_blog_path(@blog), class: "button is-warning is-small") do %>
+            <span class="icon is-small">
+              <i class="fas fa-pen"></i>
+            </span>
+            <span>Edit</span>
+          <% end %>
+        </div>
+      <% end %>
+      <div class="has-text-grey sub-header">
+        <% if @blog.tags.size > 0 %>
+          <div class="tags">
+            <% @blog.tags.each_with_index do |tag, index| %>
+              <% if (index + 1) < @blog.tags.size %>
+                <%= link_to("#{tag.text},", blogs_path(tag: tag.text), class: "has-link-text")%>
+              <% else %>
+                <%= link_to("#{tag.text}", blogs_path(tag: tag.text), class: "has-link-text")%>
+              <% end %>
+            <% end %>
+          </div>
+        <% end %>
+        <div class="published-at">
+          <%= @blog.published_at.localtime.strftime("%B %-d, %Y") %>
+        </div>
+      </div>
+      <div class="blog-embedded-video"><%= raw @blog.embedded_video %></div>
+      <div class="blog-content"><%= @blog.content %></div>
+    </div>
+  </div>
+
+  <div class="lower-cards-container">
+    <div class="card-columns columns">
+      <div class="author-details has-text-centered column">
+        <p><strong>About the author:</strong></p>
+        <%= image_tag("author.jpg", class: "author-image") %>
+        <p>Josh Jones is a musician, producer, engineer,</p>
+        <p> online educator, and heavy music fan.</p>
+      </div>
+      <div class="workshop-details has-text-centered column">
+        <div><%= image_tag("workshop_banner.jpg", class: "workshop-banner") %></div>
+        <%= link_to("Watch the free workshop", workshop_path, class: "button is-info") %>
+        <p>Learn twelve of the most important decisions</p>
+        <p>behind every great music creation success.</p>
+      </div>
+    </div>
+  </div>
+</div>

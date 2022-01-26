@@ -1,0 +1,101 @@
+.new-workshop-user {
+  background-image: asset_url("workshop_background_origional.jpg");
+  @media screen and (max-width: 2160px) {
+    background-image: asset_url("workshop_background_2160w.jpg");
+  }
+  @media screen and (max-width: 1080px) {
+    background-image: asset_url("workshop_background_1080w.jpg");
+  }
+  @media screen and (max-width: 720px) {
+    background-image: asset_url("workshop_background_720w.jpg");
+  }
+  @media screen and (max-width: 480px) {
+    background-image: asset_url("workshop_background_480w.jpg");
+  }
+  min-height: calc(100vh - 136px); // height of both navbars
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
+  .overlay {
+    display: flex;
+    justify-content: center;
+    min-height: calc(100vh - 136px); // height of both navbars
+    background-color: RGBA(22, 30, 42, 0.86);
+  }
+  .sign-up-card {
+    padding: 12px;
+    margin: 60px 0px;
+    width: 100%;
+    max-width: 525px;
+    @media screen and (max-width: 440px) {
+      line-height: 1.75em;
+      margin: 30px 0px 40px 0px;
+      .title {
+        margin-bottom: 18px;
+      }
+    }
+    .inner-sign-up-card {
+      margin-top: 30px;
+      border-radius: 5px;
+      padding: 20px;
+      background-color: white;
+      .title {
+        line-height: 1.2em;
+      }
+      @media screen and (max-width: 440px) {
+        margin-top: 25px;
+      }
+
+    }
+  }
+}
+
+.workshop-page-container {
+  padding: 50px 0px 130px 0px;
+  display: flex;
+  justify-content: center;
+  background: white;
+  height: 100%;
+  @media screen and (max-width: 440px) {
+    padding: 15px 0px 80px 0px;
+    min-height: calc(100vh - 136px); // height of both navbars
+  }
+  .workshop-title {
+    font-size: 36px;
+    line-height: 1.125;
+    font-weight: 600;
+    color: #363636;
+    margin-bottom: 24px;
+    @media screen and (max-width: 440px) {
+      font-size: 27px;
+    }
+  }
+  .workshop-page-content {
+    margin: 12px 0px -12px 0px;
+    padding: 24px;
+    background-color: white;
+    width: 100%;
+    max-width: 700px;
+    .description {
+      line-height: 1.6;
+      margin-bottom: 26px;
+    }
+  }
+}
+
+.workshop-video {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  height: 0px;
+  padding-bottom: 56.25%;
+  iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+}

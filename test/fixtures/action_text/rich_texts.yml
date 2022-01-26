@@ -1,0 +1,15 @@
+# one:
+#   record: name_of_fixture (ClassOfFixture)
+#   name: content
+#   body: <p>In a <i>million</i> stars!</p>
+
+
+one:
+  record: mixing_snare (Blog)
+  name: content
+  body: <p>Here are the 3 key steps to a great snare sound.</p>
+
+two:
+  record: mixing_kick (Blog)
+  name: content
+  body: <p>Get your kick to cut through the mix in 3 steps.</p>

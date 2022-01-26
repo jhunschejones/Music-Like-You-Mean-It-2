@@ -1,0 +1,23 @@
+<div class="blogs-admin-container">
+  <div class="all-blogs">
+    <h2 class="title is-4">All blogs</h1>
+    <%= link_to(new_blog_path, class: "button is-info is-pulled-right is-small new-blog-button") do %>
+      <span class="icon is-small">
+        <i class="fas fa-pen"></i>
+      </span>
+      <span>New blog</span>
+    <% end %>
+    <table class="table is-fullwidth is-hoverable">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Published</th>
+          <th>Edit</th>
+        </tr>
+      </thead>
+      <tbody>
+        <%= render(partial: 'blogs/admin_blog', collection: @blogs, as: :blog, cached: true) %>
+      </tbody>
+    </table>
+  </div>
+</div>

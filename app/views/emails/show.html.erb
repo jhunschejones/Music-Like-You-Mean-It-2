@@ -1,0 +1,78 @@
+<div class="email-show">
+  <div class="to-from-info-container">
+    <div class="to-from-info">
+      <% if @email.is_draft? %>
+        <p class="tag is-danger is-pulled-right">Draft</p>
+      <% end %>
+      <p>
+        <span>From: </span>
+        <span class="has-text-grey">Josh [Music Like You Mean It] <contact@musiclikeyoumeanit.com></span>
+      </p>
+      <p>
+        <span>To: </span>
+        <span class="has-text-grey"><%= @current_user.email %></span>
+      </p>
+      <p>
+        <span>Subject: </span>
+        <span class="has-text-grey"><%= @email.subject %></span>
+      </p>
+        <p>
+          <% if @email.sent_at > Time.now || @email.is_draft? %>
+            <span>Send: </span>
+          <% else %>
+              <span>Sent: </span>
+          <% end %>
+          <span class="has-text-grey"><%= @email.sent_at.localtime.strftime("%B %-d, %Y") %></span>
+        </p>
+    </div>
+  </div>
+
+  <div class="actions-container">
+    <div class="actions">
+      <%= link_to(edit_email_path(@email), class: "button is-warning is-small") do %>
+        <span class="icon is-small">
+          <i class="fas fa-pen"></i>
+        </span>
+        <span>Edit</span>
+      <% end %>
+
+      <%= link_to(test_email_path(@email), class: "button is-info is-small") do %>
+        <span class="icon is-small">
+          <i class="fas fa-paper-plane"></i>
+        </span>
+        <span>Test</span>
+      <% end %>
+    </div>
+  </div>
+
+  <%# using roughly the same layout as 'layouts/mailer.html.erb' %>
+  <table align='center' class="email-container">
+    <td>
+      <div class="email-content">
+        <table align='center' class="logo-container">
+          <td>
+            <%= image_tag("logo.jpg", height: "28", alt: "Music Like You Mean It logo") %>
+          </td>
+        </table>
+
+        <br/>
+        <p>Hi <%= @current_user.name %>,</p>
+        <br/>
+        <div><%= @email.body %></div>
+
+        <% if @email.cta_link.present? && @email.cta_text.present? %>
+          <table align='center' class="cta-container">
+            <td>
+              <%= link_to(@email.cta_text, @email.cta_link, target: :_blank, class: "cta-button") %>
+            </td>
+          </table>
+        <% end %>
+
+        <div class="email-footer">
+          <p><%= link_to("Unsubscribe", unsubscribe_url(id: @current_user.unsubscribe_key)) %> | Sent by Music Like You Mean It</p>
+          <p>6120 SW 18th Dr Apt 26 • Portland, Oregon • 97239-1992</p>
+        </div>
+      </div>
+    </td>
+  </table>
+</div>

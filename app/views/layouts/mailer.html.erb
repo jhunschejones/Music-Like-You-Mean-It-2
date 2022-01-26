@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <%= stylesheet_link_tag "email", media: "all" %>
+  </head>
+
+  <body>
+    <table align="center" class="email-container">
+      <td>
+        <div class="email-content">
+          <table align="center" class="logo-container">
+            <td>
+              <%= image_tag("logo.jpg", height: "28", alt: "Music Like You Mean It logo") %>
+            </td>
+          </table>
+
+          <%= yield %>
+
+          <div class="email-footer">
+            <p><%= link_to("Unsubscribe", unsubscribe_url(id: @user.unsubscribe_key)) %> | Sent by Music Like You Mean It</p>
+            <p>6120 SW 18th Dr Apt 26 • Portland, Oregon • 97239-1992</p>
+          </div>
+        </div>
+      </td>
+    </table>
+  </body>
+</html>

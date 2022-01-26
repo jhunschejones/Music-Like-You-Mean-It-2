@@ -1,0 +1,51 @@
+.new-user {
+  padding: 12px;
+  display: flex;
+  justify-content: center;
+  .new-user-form-container {
+    width: 100%;
+    max-width: 700px;
+  }
+}
+
+.all-users-container {
+  padding: 12px;
+  margin-top: 12px;
+  .title {
+    margin-bottom: 2px;
+  }
+  .new-user-button {
+    margin-top: -30px;
+  }
+  .users-total {
+    margin-bottom: 6px;
+  }
+  .views-column-sm {
+    display: none;
+    width: 40px;
+  }
+  .views-column-lg {
+    width: 120px;
+  }
+  @media screen and (max-width: 680px) {
+    table {
+      table-layout: fixed;
+      width: 100%;
+    }
+    .table td, .table th {
+      padding: 8px;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+    }
+    .views-column-sm {
+      display: table-cell;
+    }
+    .views-column-lg {
+      display: none;
+    }
+    .delete-user-header,
+    .delete-user-row {
+      display: none;
+    }
+  }
+}

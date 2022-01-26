@@ -1,0 +1,110 @@
+.new-email,
+.edit-email {
+  padding: 12px;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+  .new-email-form-container,
+  .edit-email-form-container {
+    width: 100%;
+    max-width: 700px;
+    .title {
+      font-weight: normal;
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+    input[type=checkbox] {
+      transform: scale(1.1);
+      margin: 0px 5px;
+    }
+  }
+}
+
+.email-show {
+  .actions-container {
+    display: flex;
+    justify-content: center;
+    .actions {
+      max-width: 582px;
+      width: 100%;
+      padding: 10px 0px 0px 12px;
+      @media screen and (min-width: 580px) {
+        padding: 10px 0px 0px 0px;
+      }
+    }
+  }
+  .to-from-info-container {
+    padding: 0px 12px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    .to-from-info {
+      width: 100%;
+      max-width: 550px;
+      padding-top: 12px;
+      @media screen and (min-width: 580px) {
+        padding-top: 30px;
+        max-width: 580px;
+      }
+    }
+  }
+  .email-container {
+    display: flex;
+    justify-content: center;
+    tbody {
+      background-color: white;
+    }
+    .email-content {
+      padding: 12px;
+      margin: 0px;
+      width: 100%;
+      @media screen and (min-width: 580px) {
+        width: 550px;
+        padding: 0px;
+        margin: 16px;
+      }
+      .logo-container {
+        td {
+          padding: 20px !important;
+        }
+      }
+      br {
+        display: block;
+        content: "";
+        margin-top: 14px;
+      }
+    }
+  }
+}
+
+.all-emails-container {
+  padding: 12px;
+  margin-top: 12px;
+  .title {
+    margin-bottom: 8px;
+  }
+  .new-email-button,
+  .send-daily-email-button {
+    .fa-spinner {
+      margin-right: 5px;
+      margin-left: -4px;
+    }
+    margin-top: -40px;
+    .large-screen-description {
+      @media screen and (max-width: 680px) {
+        display: none;
+      }
+    }
+  }
+  .send-daily-email-button {
+    margin-right: 105px;
+    @media screen and (max-width: 680px) {
+      margin-right: 70px;
+    }
+  }
+  @media screen and (max-width: 680px) {
+    .table td, .table th {
+      padding: 8px;
+    }
+  }
+}

@@ -1,0 +1,8 @@
+Hi <%= @user.name %>,
+
+<%= @email.body.to_plain_text %>
+
+<% if @email.cta_link.present? && @email.cta_text.present? %>
+  <%= @email.cta_text %>:
+  <%= @email.cta_link %>
+<% end %>

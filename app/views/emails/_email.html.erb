@@ -1,0 +1,10 @@
+<tr class="email_<%= email.id %>">
+  <td>
+    <%= link_to(email.subject, email_path(email), class: "has-text-link") %>
+    <% if email.is_draft %>
+      <span class="tag is-danger">Draft</span>
+    <% end %>
+  </td>
+  <td><%= email.sent_at.localtime.strftime("%B %-d, %Y") %></td>
+  <td><%= link_to("Edit", edit_email_path(email), class: "has-text-link") %></td>
+</tr>

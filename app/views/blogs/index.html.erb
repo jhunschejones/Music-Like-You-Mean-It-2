@@ -1,0 +1,21 @@
+<div class="blogs">
+  <% cache(@blogs) do %>
+    <%= render(partial: 'blogs/blog', collection: @blogs, cached: true) %>
+
+    <div class="pagination-container">
+      <%= will_paginate(@blogs, renderer: BulmaPagination::Rails, class: 'is-centered', maximum_links: 2) %>
+    </div>
+  <% end %>
+
+  <div class="search-input-container">
+    <%= form_with(url: blogs_path, method: :get, local: true, class: "blog-search-form") do |f| %>
+      <p class="control has-icons-left">
+        <input class="input" name="q" type="search" placeholder="Search blog content..." autocomplete="off">
+        <span class="icon is-small is-left">
+          <%= fa_icon("search", class: "fas") %>
+        </span>
+        <%= f.submit "Search", name: nil, class: "button is-link is-outlined blog-search-button" %>
+      </p>
+    <% end %>
+  </div>
+</div>

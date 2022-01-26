@@ -1,0 +1,32 @@
+<div class="blog-container">
+  <div class="blog">
+    <h2 class="blog-title title is-1"><%= blog.title %></h2>
+    <div class="has-text-grey sub-header">
+      <% if blog.tags.size > 0 %>
+        <div class="tags">
+          <% blog.tags.each_with_index do |tag, index| %>
+            <% if (index + 1) < blog.tags.size %>
+              <%= link_to("#{tag.text},", blogs_path(tag: tag.text), class: "has-link-text")%>
+            <% else %>
+              <%= link_to("#{tag.text}", blogs_path(tag: tag.text), class: "has-link-text")%>
+            <% end %>
+          <% end %>
+        </div>
+      <% end %>
+      <div class="published-at">
+        <%= blog.published_at.localtime.strftime("%B %-d, %Y") %>
+      </div>
+    </div>
+    <div class="blog-embedded-video">
+      <%= raw blog.embedded_video %>
+    </div>
+    <div class="blog-content">
+      <div class="trix-content">
+        <%= raw(truncate_after_two_paragraphs(blog.content)) %>
+      </div>
+    </div>
+    <div class="blog-details-link">
+      <%= link_to("Continue reading...", blog_path(id: blog.id_for_url), class: "has-text-link") %>
+    </div>
+  </div>
+</div>

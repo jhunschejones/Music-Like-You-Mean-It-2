@@ -1,0 +1,32 @@
+<div class="new-user">
+  <div class="new-user-form-container">
+    <br/>
+    <h2 class="title is-4">Manually add a site user</h2>
+    <%= form_with(model: @user, url: users_path) do |f| %>
+      <div class="field">
+        <p class="control has-icons-left">
+          <input class="input" type="text" placeholder="Name" name="user[name]">
+          <span class="icon is-small is-left">
+            <i class="fas fa-user"></i>
+          </span>
+        </p>
+      </div>
+
+      <div class="field">
+        <p class="control has-icons-left">
+          <input class="input" type="email" placeholder="Email" name="user[email]">
+          <span class="icon is-small is-left">
+            <i class="fas fa-envelope"></i>
+          </span>
+        </p>
+      </div>
+
+      <%= f.hidden_field :skip_email, value: true %>
+
+      <div class="actions">
+        <%= f.submit "Add user", class: "button is-info" %>
+        <%= link_to("Back", :back, class: "button is-info is-outlined") %>
+      </div>
+    <% end %>
+  </div>
+</div>

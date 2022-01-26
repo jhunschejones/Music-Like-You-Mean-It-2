@@ -1,0 +1,10 @@
+<tr class="blog_<%= blog.id %>">
+  <td>
+    <%= link_to(blog.title, blog_path(blog), class: "has-text-link") %>
+    <% if blog.is_draft %>
+      <span class="tag is-danger">Draft</span>
+    <% end %>
+  </td>
+  <td><%= blog.published_at.localtime.strftime("%B %-d, %Y") %></td>
+  <td><%= link_to("Edit", edit_blog_path(blog), class: "has-text-link") %></td>
+</tr>
