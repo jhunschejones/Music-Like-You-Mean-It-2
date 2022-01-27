@@ -41,8 +41,8 @@ Rails.application.configure do
   # Store uploaded files on the local file system (see config/storage.yml for options).
   config.active_storage.service = :local
 
-  config.action_cable.allowed_request_origins = [ "https://www.musiclikeyoumeanit.com/" ]
-  config.web_socket_server_url = "wss://www.musiclikeyoumeanit.com/cable"
+  config.action_cable.allowed_request_origins = [ "https://music-like-you-mean-it-2.herokuapp.com/" ]
+  config.web_socket_server_url = "wss://music-like-you-mean-it-2.herokuapp.com/cable"
 
   config.session_store :cookie_store, expire_after: 14.days, key: "__Host-music_like_you_mean_it_session", secure: Rails.env.production?
 
@@ -60,7 +60,7 @@ Rails.application.configure do
 
   # Use a different cache store in production.
   config.cache_store = :redis_cache_store, {
-    url: ENV["REDIS_URL"],
+    url: ENV["HEROKU_REDIS_SILVER_URL"],
     expires_in: 5.days,
     size: 25.megabytes
   }
@@ -71,7 +71,7 @@ Rails.application.configure do
     # config.active_job.queue_name_prefix = "music_like_you_mean_it_production"
   end
 
-  config.action_mailer.default_url_options = { host: "www.musiclikeyoumeanit.com", protocol: "https" }
+  config.action_mailer.default_url_options = { host: "music-like-you-mean-it-2.herokuapp.com", protocol: "https" }
 
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
