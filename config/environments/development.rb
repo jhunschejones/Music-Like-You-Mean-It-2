@@ -45,6 +45,7 @@ Rails.application.configure do
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.default_options = { from: "Music Like You Mean It" }
   config.action_mailer.delivery_method = :smtp
+  # https://docs.aws.amazon.com/ses/latest/dg/smtp-credentials.html
   config.action_mailer.smtp_settings = {
     address: "email-smtp.us-east-1.amazonaws.com",
     port: 587,
