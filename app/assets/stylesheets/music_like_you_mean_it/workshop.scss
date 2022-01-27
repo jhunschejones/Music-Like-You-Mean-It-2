@@ -52,14 +52,14 @@
 }
 
 .workshop-page-container {
-  padding: 50px 0px 130px 0px;
+  padding: 50px 0px;
   display: flex;
   justify-content: center;
   background: white;
   height: 100%;
+  min-height: calc(100vh - 136px); // height of both navbars
   @media screen and (max-width: 440px) {
-    padding: 15px 0px 80px 0px;
-    min-height: calc(100vh - 136px); // height of both navbars
+    padding: 24px 0px;
   }
   .workshop-title {
     font-size: 36px;
@@ -72,7 +72,6 @@
     }
   }
   .workshop-page-content {
-    margin: 12px 0px -12px 0px;
     padding: 24px;
     background-color: white;
     width: 100%;
