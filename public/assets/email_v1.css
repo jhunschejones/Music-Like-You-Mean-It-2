@@ -1,0 +1,83 @@
+/* line 1, app/assets/stylesheets/email.scss */
+.email-container {
+  color: #4a4a4a;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open Sans", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  padding: 12px;
+  line-height: 1.45em;
+  font-size: 16px;
+}
+
+/* line 7, app/assets/stylesheets/email.scss */
+.email-container .email-content {
+  padding: 16px;
+  background-color: white;
+  max-width: 550px;
+}
+
+@media screen and (max-width: 500px) {
+  /* line 7, app/assets/stylesheets/email.scss */
+  .email-container .email-content {
+    padding: 16px 12px;
+  }
+}
+
+/* line 14, app/assets/stylesheets/email.scss */
+.email-container .email-content .logo-container {
+  padding: 20px;
+}
+
+@media screen and (max-width: 500px) {
+  /* line 14, app/assets/stylesheets/email.scss */
+  .email-container .email-content .logo-container {
+    padding: 0px 20px 20px 20px;
+  }
+}
+
+/* line 19, app/assets/stylesheets/email.scss */
+.email-container .email-content .logo-container img {
+  height: 28px;
+}
+
+/* line 23, app/assets/stylesheets/email.scss */
+.email-container .email-content a {
+  color: #3273dc;
+}
+
+/* line 26, app/assets/stylesheets/email.scss */
+.email-container .email-content .cta-container {
+  margin-top: 16px;
+}
+
+/* line 28, app/assets/stylesheets/email.scss */
+.email-container .email-content .cta-container .cta-button {
+  font-weight: 600;
+  background-color: #3273dc;
+  color: #fff;
+  cursor: pointer;
+  padding-bottom: calc(0.75em - 1px);
+  padding-left: 1.1em;
+  padding-right: 1.1em;
+  padding-top: calc(0.75em - 1px);
+  text-align: center;
+  white-space: nowrap;
+  line-height: 1.5;
+  font-size: 1rem;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  box-shadow: none;
+  text-decoration: none;
+}
+
+/* line 47, app/assets/stylesheets/email.scss */
+.email-container .email-content .email-footer {
+  margin-top: 50px;
+  padding: 0px;
+  color: #b5b5b5;
+  font-size: 0.75em;
+  text-align: center;
+}
+
+/* line 53, app/assets/stylesheets/email.scss */
+.email-container .email-content .email-footer p {
+  margin: 0;
+}
