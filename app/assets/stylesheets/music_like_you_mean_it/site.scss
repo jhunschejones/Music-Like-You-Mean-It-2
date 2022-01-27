@@ -27,6 +27,18 @@ body {
     left: calc(50% - 10px);
     width: 20px;
   }
+  .logout-button {
+    -webkit-appearance: none;
+    background: none;
+    border: none;
+    font-size: 1em;
+    height: 100%;
+    &:hover {
+      // match navbar-item styles on hover
+      background-color: #fafafa;
+      cursor: pointer;
+    }
+  }
 }
 
 .flash {

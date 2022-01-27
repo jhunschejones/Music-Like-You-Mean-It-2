@@ -41,7 +41,7 @@
           <%= link_to("Blog", blogs_path, class: "navbar-item") %>
           <%= link_to("Workshop", workshop_path, class: "navbar-item") %>
           <% if @current_user&.is_admin? %>
-            <%= link_to("Log out", logout_path, method: :delete, class: "navbar-item has-text-danger") %>
+            <%= button_to("Log out", logout_path, method: :delete, class: "navbar-item has-text-danger logout-button") %>
           <% end %>
         </div>
       </div>
