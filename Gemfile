@@ -18,7 +18,6 @@ gem "importmap-rails"
 gem "turbo-rails"
 gem "stimulus-rails"
 gem "sassc-rails"
-gem "premailer-rails"
 
 gem "font_awesome5_rails"
 gem "bulma-rails"
