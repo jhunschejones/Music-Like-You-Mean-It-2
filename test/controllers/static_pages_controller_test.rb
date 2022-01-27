@@ -32,16 +32,4 @@ class StaticPagesControllerTest < ActionDispatch::IntegrationTest
       end
     end
   end
-
-  describe "custom error pages" do
-    test "returns custom error page for 404" do
-      get "/404"
-      assert_select "h1.title", "404"
-    end
-
-    test "returns custom error page for 500" do
-      get "/500"
-      assert_select "h1.title", "500"
-    end
-  end
 end

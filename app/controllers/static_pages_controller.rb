@@ -16,12 +16,4 @@ class StaticPagesController < ApplicationController
   rescue ActiveRecord::RecordNotFound
     render "users/new_workshop_user"
   end
-
-  def error
-    if params[:code] == "404"
-      render "404", status: 404
-    else
-      render "500", status: 500
-    end
-  end
 end
