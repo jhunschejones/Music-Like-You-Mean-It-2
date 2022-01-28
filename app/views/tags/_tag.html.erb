@@ -2,6 +2,6 @@
   <li class="blog-tag tag_<%= tag.id %>">
     <span><%= tag.text %></span>
     <strong class="resource-action-divider has-text-link">|</strong>
-    <%= link_to("Delete", tag_path(tag), method: :delete, class: "has-text-link", data: { "turbo-method" => "delete", controller: "confirmation", confirmation_message_value: "Are you sure you want to delete the '#{tag.text}' tag? This action is permanent.", action: "confirmation#confirm" }) %>
+    <%= link_to("Delete", tag_path(tag), method: :delete, class: "has-text-link", data: { turbo_method: "delete", turbo_confirm: "Are you sure you want to delete the '#{tag.text}' tag? This action is permanent." }) %>
   </li>
 <% end %>
