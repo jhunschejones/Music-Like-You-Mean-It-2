@@ -5,7 +5,7 @@
     <%= form_with(model: @email, url: email_path(@email)) do |f| %>
       <div class="field">
         <%= f.label :subject %>&nbsp;<span class="is-italic has-text-grey-light">(aim for 70 characters or less)</span>
-        <%= f.text_field :subject, autocomplete: 'off', class: "input" %>
+        <%= f.text_field :subject, autocomplete: "off", class: "input" %>
       </div>
 
       <div class="field">
@@ -15,12 +15,12 @@
 
       <div class="field">
         <%= f.label "Call to action text" %><br />
-        <%= f.text_area :cta_text, autocomplete: 'off', class: "input" %>
+        <%= f.text_area :cta_text, autocomplete: "off", class: "input" %>
       </div>
 
       <div class="field">
         <%= f.label "Call to action link" %><br />
-        <%= f.text_area :cta_link, autocomplete: 'off', class: "input" %>
+        <%= f.text_area :cta_link, autocomplete: "off", class: "input" %>
       </div>
 
       <div class="field">
