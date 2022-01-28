@@ -5,7 +5,7 @@
     <%= form_with(model: @blog, url: blogs_path) do |f| %>
       <div class="field">
         <%= f.label :title %>
-        <%= f.text_field :title, autocomplete: 'off', class: "input" %>
+        <%= f.text_field :title, autocomplete: "off", class: "input" %>
       </div>
 
       <div class="field">
@@ -15,23 +15,24 @@
 
       <div class="field">
         <%= f.label :embedded_video %>
-        <%= f.text_area :embedded_video, autocomplete: 'off', class: "textarea" %>
+        <%= f.text_area :embedded_video, autocomplete: "off", class: "textarea" %>
       </div>
 
       <div class="field">
         <%= f.label :published_at %><br />
         <%= f.datetime_select :published_at, ampm: true, use_short_month: true, order: [:month, :day, :year], minute_step: 10, start_year: 1.year.ago.year %>
+        <%#= f.datetime_field :published_at, min: 2.years.ago, max: 1.year.from_now %>
         <small class="has-text-grey-light">(USA Central Time)</small>
       </div>
 
       <div class="field">
         <%= f.label :named_url %>
-        <%= f.text_field :named_url, autocomplete: 'off', class: "input" %>
+        <%= f.text_field :named_url, autocomplete: "off", class: "input", placeholder: "cats-take-over-studio..." %>
       </div>
 
       <div class="field">
         <%= f.label :blog_tags %>
-        <%= f.text_field :blog_tags, autocomplete: 'off', class: "input" %>
+        <%= f.text_field :blog_tags, autocomplete: "off", class: "input", placeholder: "Add comma separated tags..." %>
       </div>
 
       <div class="field">
