@@ -1,5 +1,5 @@
 class Blog < ApplicationRecord
-  has_many :tags
+  has_many :tags, dependent: :destroy, inverse_of: :blog
   has_rich_text :content
   # used to query the attached ActionText directly
   has_one :action_text_rich_text, class_name: "ActionText::RichText", as: :record
