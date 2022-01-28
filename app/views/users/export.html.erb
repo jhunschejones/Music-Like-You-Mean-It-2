@@ -1,0 +1,15 @@
+<div class="static-page-container">
+  <div class="static-page-content">
+    <h1 class="title is-4">Export your users</h1>
+
+    <p>
+      Download a CSV of your user list for data backup or to use in another tool.
+    </p>
+
+    <div class="actions">
+      <%= link_to(download_users_path(format: :csv), target: "_blank", rel: "noopener noreferrer", class: "button is-info") do %>
+        Download all users
+      <% end %>
+    </div>
+  </div>
+</div>

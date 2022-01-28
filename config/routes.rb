@@ -17,7 +17,12 @@ Rails.application.routes.draw do
   post "/workshop_users", to: "users#create_workshop_users"
 
   get "/unsubscribe", to: "users#unsubscribe", as: :unsubscribe
-  resources :users, only: [:index, :new, :create, :destroy]
+  resources :users, only: [:index, :new, :create, :destroy] do
+    collection do
+      get :export
+      get :download
+    end
+  end
   resources :blogs, except: [:delete, :destroy]
   resources :tags, only: [:destroy]
   resources :emails, except: [:delete] do

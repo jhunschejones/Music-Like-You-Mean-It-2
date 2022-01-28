@@ -1,7 +1,18 @@
+require "csv"
+
 class UsersController < ApplicationController
   class InsecureRequest < StandardError; end
 
   skip_before_action :authenticate_admin_user, only: [:create_workshop_users, :unsubscribe, :destroy]
+
+  ORDERED_CSV_FIELDS = [
+    :name,
+    :email,
+    :site_role,
+    :workshop_page_views,
+    :created_at,
+    :updated_at
+  ]
 
   def index
     @users = User.where(site_role: User::SITE_USER).order({ created_at: :desc })
@@ -57,6 +68,23 @@ class UsersController < ApplicationController
     else
       flash[:alert] = "Something went wrong! Please follow the unsubscribe link from your email again."
       redirect_to workshop_path
+    end
+  end
+
+  def export
+  end
+
+  def download
+    csv = CSV.generate(headers: true) do |csv|
+      csv << ORDERED_CSV_FIELDS # add headers
+
+      User.find_each do |user|
+        csv << ORDERED_CSV_FIELDS.map { |attr| user.send(attr) }
+      end
+    end
+
+    respond_to do |format|
+      format.csv { send_data(csv, filename: "users_export_#{Time.now.utc.to_i}.csv") }
     end
   end
 

@@ -13,6 +13,18 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
         get new_user_path
         assert_redirected_to login_path
       end
+
+      test "user cannot access user export page" do
+        get export_users_path
+        follow_redirect!
+        assert_equal login_path, path
+      end
+
+      test "user cannot access user download" do
+        get download_users_path(format: :csv)
+        follow_redirect!
+        assert_equal login_path, path
+      end
     end
 
     describe "when site user is logged in" do
@@ -28,6 +40,18 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
       test "user is blocked from new users page" do
         get new_user_path
         assert_redirected_to login_path
+      end
+
+      test "user cannot access user export page" do
+        get export_users_path
+        follow_redirect!
+        assert_equal login_path, path
+      end
+
+      test "user cannot access user download" do
+        get download_users_path(format: :csv)
+        follow_redirect!
+        assert_equal login_path, path
       end
     end
 
@@ -46,6 +70,16 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
         get new_user_path
         assert_response :success
         assert_select "h2", "Manually add a site user"
+      end
+
+      test "user can access user export page" do
+        get export_users_path
+        assert_response :success
+      end
+
+      test "user cannot access user download" do
+        get download_users_path(format: :csv)
+        assert_response :success
       end
     end
   end
