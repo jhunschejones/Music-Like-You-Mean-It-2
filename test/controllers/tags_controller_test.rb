@@ -6,7 +6,7 @@ class TagsControllerTest < ActionDispatch::IntegrationTest
     describe "when no user is logged in" do
       test "user is blocked from deleting tags" do
         assert_no_difference "Tag.count" do
-          delete tag_path(tags(:mixing_1), format: :js)
+          delete tag_path(tags(:mixing_1), format: :turbo_stream)
         end
         assert_redirected_to login_path
       end
@@ -19,7 +19,7 @@ class TagsControllerTest < ActionDispatch::IntegrationTest
 
       test "user is blocked from deleting tags" do
         assert_no_difference "Tag.count" do
-          delete tag_path(tags(:mixing_1), format: :js)
+          delete tag_path(tags(:mixing_1), format: :turbo_stream)
         end
         assert_redirected_to login_path
       end
@@ -30,9 +30,9 @@ class TagsControllerTest < ActionDispatch::IntegrationTest
         login_as(users(:site_admin))
       end
 
-      test "user is blocked from deleting tags" do
+      test "admin can delete tags" do
         assert_difference "Tag.count", -1 do
-          delete tag_path(tags(:mixing_1), format: :js)
+          delete tag_path(tags(:mixing_1), format: :turbo_stream)
         end
       end
     end

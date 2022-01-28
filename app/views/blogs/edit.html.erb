@@ -21,7 +21,7 @@
       <div class="field">
         <%= f.label :published_at %><br />
         <%= f.datetime_select :published_at, ampm: true, use_short_month: true, order: [:month, :day, :year], minute_step: 10, start_year: 1.year.ago.year %>
-        <small class="has-text-grey-light">(USA Pacific Time)</small>
+        <small class="has-text-grey-light">(USA Central Time)</small>
       </div>
 
       <div class="field">
@@ -38,7 +38,7 @@
       <div class="new-tag-form">
         <%= f.fields_for :tag, @tag do |tag_attributes|%>
           <%= tag_attributes.hidden_field :blog_id, value: @blog.id %>
-          <%= tag_attributes.text_field :text, placeholder: "Add new tags...", autocomplete: 'off', class: "input" %>
+          <%= tag_attributes.text_field :text, placeholder: "Add comma separated tags...", autocomplete: 'off', class: "input" %>
         <% end %>
       </div>
 

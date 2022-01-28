@@ -49,13 +49,6 @@ class EmailsControllerTest < ActionDispatch::IntegrationTest
         end
         assert_redirected_to login_path
       end
-
-      test "user is blocked from deleting emails" do
-        assert_no_difference 'Email.count' do
-          delete email_path(emails(:draft), format: :js)
-        end
-        assert_redirected_to login_path
-      end
     end
 
     describe "when site user is logged in" do
@@ -105,13 +98,6 @@ class EmailsControllerTest < ActionDispatch::IntegrationTest
       test "user is blocked from updating emails" do
         assert_no_changes -> { Email.find(emails(:draft).id).subject } do
           patch email_path(emails(:draft)), params: { email: { subject: "Change The Email Subject" } }
-        end
-        assert_redirected_to login_path
-      end
-
-      test "user is blocked from deleting emails" do
-        assert_no_difference 'Email.count' do
-          delete email_path(emails(:draft), format: :js)
         end
         assert_redirected_to login_path
       end
@@ -175,12 +161,6 @@ class EmailsControllerTest < ActionDispatch::IntegrationTest
           patch email_path(emails(:draft)), params: { email: { subject: "Change The Subject" } }
         end
         assert_equal "Change The Subject", Email.find(emails(:draft).id).subject
-      end
-
-      test "user is can delete deleting emails" do
-        assert_difference 'Email.count', -1 do
-          delete email_path(emails(:draft), format: :js)
-        end
       end
     end
   end

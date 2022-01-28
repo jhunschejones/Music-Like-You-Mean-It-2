@@ -25,11 +25,6 @@ class EmailsController < ApplicationController
     redirect_to email_path(@email)
   end
 
-  def destroy
-    @email.destroy
-    respond_to(&:js)
-  end
-
   def test_email
     UserMailer.daily_email(
       email_id: @email.id,

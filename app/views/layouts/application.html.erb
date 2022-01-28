@@ -48,17 +48,17 @@
     </nav>
 
     <% if flash[:alert] %>
-      <div class="flash notification is-danger" data-controller="flash">
+      <div class="flash notification is-danger" data-controller="flash" data-turbo-cache="false">
         <button class="delete" data-action="click->flash#close"></button>
         <p class="notice"><%= flash[:alert] %></p>
       </div>
     <% elsif flash[:notice] %>
-      <div class="flash notification is-warning" data-controller="flash">
+      <div class="flash notification is-warning" data-controller="flash" data-turbo-cache="false">
         <button class="delete" data-action="click->flash#close"></button>
         <p class="notice"><%= flash[:notice] %></p>
       </div>
     <% elsif flash[:success] %>
-      <div class="flash notification is-success" data-controller="flash">
+      <div class="flash notification is-success" data-controller="flash" data-turbo-cache="false">
         <button class="delete" data-action="click->flash#close"></button>
         <p class="notice"><%= flash[:success] %></p>
       </div>

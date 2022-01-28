@@ -21,7 +21,7 @@ class UsersController < ApplicationController
     @user = User.from_unsubscribe_key(params[:id])
     session[:user_id] = @user.id
   rescue
-    flash[:alert] = "Something went wrong! Please follow the unsubscribe link from your email again."
+    flash[:notice] = "We couldn't find you! You are either already unsubscribed, or you'll need to follow the unsubscribe link from your email again."
     redirect_to workshop_path
   end
 
@@ -38,19 +38,18 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    @user_to_delete = User.find(params[:id])
+    # user is authenticated automatically when they go to the unsubscribe page
     @authenticated_user = User.find(session[:user_id])
+    @user_to_delete = User.find(params[:id])
     secure_request!
     @user_to_delete.destroy!
 
-    respond_to do |format|
-      format.js
-      format.html {
-        reset_session
-        flash[:notice] = "You have successfully unsubscribed."
-        redirect_to workshop_path
-      }
-    end
+    return respond_to(&:turbo_stream) if @authenticated_user.is_admin?
+
+    reset_session
+    flash[:notice] = "You have successfully unsubscribed."
+    # https://github.com/hotwired/turbo-rails/issues/122#issuecomment-782766453
+    redirect_to workshop_path, status: :see_other
   rescue
     if @authenticated_user
       flash[:alert] = "Something went wrong! Please try again."

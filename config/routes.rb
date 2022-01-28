@@ -12,7 +12,6 @@ Rails.application.routes.draw do
     get "pages/terms" => :terms
     get "pages/about" => :about
     get "workshop" => :workshop
-    get "error" => :error
   end
 
   post "/workshop_users", to: "users#create_workshop_users"

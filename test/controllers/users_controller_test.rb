@@ -177,12 +177,12 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     describe "when there is no authenticated user" do
       test "does not destroy user" do
         assert_no_difference 'User.count' do
-          delete user_path(users(:site_user))
+          delete user_path(users(:site_user), format: :turbo_stream)
         end
       end
 
       test "redirects to unsubscribe page with message" do
-        delete user_path(users(:site_user))
+        delete user_path(users(:site_user), format: :turbo_stream)
         assert_redirected_to workshop_path
         assert_match /follow the unsubscribe link/, flash[:alert]
       end
@@ -195,12 +195,12 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
 
       test "does not destroy user" do
         assert_no_difference 'User.count' do
-          delete user_path(users(:site_admin))
+          delete user_path(users(:site_admin), format: :turbo_stream)
         end
       end
 
       test "redirects to unsubscribe page for the authenticated user with message" do
-        delete user_path(users(:site_admin))
+        delete user_path(users(:site_admin), format: :turbo_stream)
         # resets unsubscribe key based on authenticated user, not user in params
         assert_redirected_to unsubscribe_path(id: users(:site_user).unsubscribe_key)
         assert_equal "Something went wrong! Please try again.", flash[:alert]
@@ -214,14 +214,32 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
 
       test "destroys the user" do
         assert_difference 'User.count', -1 do
-          delete user_path(users(:site_user))
+          delete user_path(users(:site_user), format: :turbo_stream)
         end
       end
 
       test "redirects to the workshop page with message" do
-        delete user_path(users(:site_user))
+        delete user_path(users(:site_user), format: :turbo_stream)
         assert_redirected_to workshop_path
         assert_equal "You have successfully unsubscribed.", flash[:notice]
+      end
+    end
+
+    describe "when an authenticated admin makes a turbo stream request" do
+      before do
+        login_as(users(:site_admin))
+      end
+
+      test "destroys the target user" do
+        assert_difference 'User.count', -1 do
+          delete user_path(users(:site_user), format: :turbo_stream)
+        end
+      end
+
+      test "responds with turbo-remove" do
+        delete user_path(users(:site_user), format: :turbo_stream)
+        assert_match /turbo-stream action="remove"/, response.body
+        assert_match /target="user_#{users(:site_user).id}"/, response.body
       end
     end
   end
