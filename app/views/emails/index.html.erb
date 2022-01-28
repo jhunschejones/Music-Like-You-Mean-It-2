@@ -1,7 +1,7 @@
 <div class="all-emails">
   <div class="all-emails-container">
     <h2 class="title is-4">All emails</h1>
-    <%= button_to(send_daily_email_emails_path, method: :post, data: { confirm: "This will send an email to every user. Are you sure that's what you intended to do?", disable_with: "<i class='fas fa-spinner fa-spin'></i><span>Send<span class=\"large-screen-description\">&nbsp;daily email</span></span>" }, class: "button is-info is-pulled-right is-small send-daily-email-button") do %>
+    <%= button_to(send_daily_email_emails_path, method: :post, data: { turbo_confirm: "This will send an email to every user. Are you sure that's what you intended to do?", controller: "disable", disable_with_value: "<i class='fas fa-spinner fa-spin'></i><span>Send<span class=\"large-screen-description\">&nbsp;daily email</span></span>", action: "disable#disableButton", disable_target: "button" }, class: "button is-info is-pulled-right is-small send-daily-email-button") do %>
       <span class="icon is-small">
         <i class="fas fa-paper-plane"></i>
       </span>
