@@ -25,7 +25,7 @@
 
       <div class="field">
         <%= f.label :sent_at %><br />
-        <%= f.datetime_select :sent_at, ampm: true, use_short_month: true, order: [:month, :day, :year], minute_step: 15, start_year: 1.year.ago.year %>
+        <%= f.datetime_select :sent_at, ampm: true, use_short_month: true, order: [:month, :day, :year], minute_step: 15, start_year: 2.years.ago.year %>
         <%#= f.datetime_field :published_at, min: 2.years.ago, max: 1.year.from_now %>
         <small class="has-text-grey-light">(USA Central Time)</small>
       </div>
