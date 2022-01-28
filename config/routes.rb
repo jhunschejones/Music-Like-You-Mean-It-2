@@ -21,6 +21,8 @@ Rails.application.routes.draw do
     collection do
       get :export
       get :download
+      get :import
+      post :upload
     end
   end
   resources :blogs, except: [:delete, :destroy]

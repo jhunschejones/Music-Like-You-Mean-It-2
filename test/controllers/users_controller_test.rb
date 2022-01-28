@@ -16,14 +16,25 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
 
       test "user cannot access user export page" do
         get export_users_path
-        follow_redirect!
-        assert_equal login_path, path
+        assert_redirected_to login_path
       end
 
       test "user cannot access user download" do
         get download_users_path(format: :csv)
-        follow_redirect!
-        assert_equal login_path, path
+        assert_redirected_to login_path
+      end
+
+      test "user cannot access user import page" do
+        get import_users_path
+        assert_redirected_to login_path
+      end
+
+      test "user is blocked from user upload" do
+        csv_file = fixture_file_upload("test/fixtures/files/users_export_1643392033.csv", "text/csv")
+        assert_no_difference "User.count" do
+          post upload_users_path, params: { csv_file: csv_file, csv_includes_headers: true }
+        end
+        assert_redirected_to login_path
       end
     end
 
@@ -44,14 +55,25 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
 
       test "user cannot access user export page" do
         get export_users_path
-        follow_redirect!
-        assert_equal login_path, path
+        assert_redirected_to login_path
       end
 
       test "user cannot access user download" do
         get download_users_path(format: :csv)
-        follow_redirect!
-        assert_equal login_path, path
+        assert_redirected_to login_path
+      end
+
+      test "user cannot access user import page" do
+        get import_users_path
+        assert_redirected_to login_path
+      end
+
+      test "user is blocked from user upload" do
+        csv_file = fixture_file_upload("test/fixtures/files/users_export_1643392033.csv", "text/csv")
+        assert_no_difference "User.count" do
+          post upload_users_path, params: { csv_file: csv_file, csv_includes_headers: true }
+        end
+        assert_redirected_to login_path
       end
     end
 
@@ -77,9 +99,30 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
         assert_response :success
       end
 
-      test "user cannot access user download" do
+      test "user can access user download" do
         get download_users_path(format: :csv)
         assert_response :success
+      end
+
+      test "user can access user import page" do
+        get import_users_path
+        assert_response :success
+      end
+
+      test "user can upload a valid user CSV" do
+        csv_file = fixture_file_upload("test/fixtures/files/users_export_1643392033.csv", "text/csv")
+        assert_difference "User.count", 2 do
+          post upload_users_path, params: { csv_file: csv_file, csv_includes_headers: true }
+        end
+        assert_redirected_to users_path
+        assert_equal "2 new users imported, 1 user already exists.", flash[:success]
+
+        new_user = User.find_by(email: "linguini.paws@dafox.com")
+        assert_equal "Linguini Paws", new_user.name
+        assert_equal User::SITE_USER, new_user.site_role
+        assert_equal 2, new_user.workshop_page_views
+        assert_equal Time.parse("Fri, 28 Jan 2022 11:47:01.000000000 CST -06:00"), new_user.created_at
+        assert_equal Time.parse("Fri, 29 Jan 2022 11:47:01.000000000 CST -06:00"), new_user.updated_at
       end
     end
   end
@@ -274,6 +317,46 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
         delete user_path(users(:site_user), format: :turbo_stream)
         assert_match /turbo-stream action="remove"/, response.body
         assert_match /target="user_#{users(:site_user).id}"/, response.body
+      end
+    end
+  end
+
+  describe "#date_or_time_from" do
+    test "parses a short month, short day, short year datetime string" do
+      assert_equal Date.new(2021, 1, 3), UsersController.new.send(:date_or_time_from, "1/3/21")
+    end
+
+    test "parses a short month, long day, short year datetime string" do
+      assert_equal Date.new(2021, 1, 15), UsersController.new.send(:date_or_time_from, "1/15/21")
+    end
+
+    test "parses a long month, long day, short year datetime string" do
+      assert_equal Date.new(2021, 10, 15), UsersController.new.send(:date_or_time_from, "10/15/21")
+    end
+
+    test "parses a short month, short day, long year datetime string" do
+      assert_equal Date.new(2021, 1, 3), UsersController.new.send(:date_or_time_from, "1/3/2021")
+    end
+
+    test "parses a short month, long day, long year datetime string" do
+      assert_equal Date.new(2021, 1, 15), UsersController.new.send(:date_or_time_from, "1/15/2021")
+    end
+
+    test "parses a long month, long day, long year datetime string" do
+      assert_equal Date.new(2021, 10, 15), UsersController.new.send(:date_or_time_from, "10/15/2021")
+    end
+
+    test "parses an integer timestamp" do
+      assert_equal User.last.created_at.to_time.change(usec: 0), UsersController.new.send(:date_or_time_from, User.last.created_at.to_i)
+    end
+
+    test "parses a string timestamp" do
+      assert_equal User.last.created_at.to_time.change(usec: 0), UsersController.new.send(:date_or_time_from, User.last.created_at.to_s)
+    end
+
+    test "raises on invalid date or time" do
+      assert_raises UsersController::InvalidDateOrTime, "space_cats" do
+        UsersController.new.send(:date_or_time_from, "space_cats")
       end
     end
   end

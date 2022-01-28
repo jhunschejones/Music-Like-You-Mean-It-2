@@ -1,13 +1,30 @@
 <div class="all-users">
   <div class="all-users-container">
     <h2 class="title is-4">All site users</h1>
-    <%= link_to(new_user_path, class: "button is-info is-pulled-right is-small new-user-button") do %>
-      <span class="icon is-small">
-        <i class="fas fa-pen"></i>
-      </span>
-      <span>Add a user</span>
-    <% end %>
+
+    <div class="actions">
+      <%= link_to(new_user_path, class: "button is-info is-small") do %>
+        <span class="icon is-small">
+          <i class="fas fa-plus"></i>
+        </span>
+        <span>New</span>
+      <% end %>
+      <%= link_to(import_users_path, class: "button is-info is-small desktop-action") do %>
+        <span class="icon is-small">
+          <i class="fas fa-file-upload"></i>
+        </span>
+        <span>Import</span>
+      <% end %>
+      <%= link_to(export_users_path, class: "button is-info is-small") do %>
+        <span class="icon is-small">
+          <i class="fas fa-file-download"></i>
+        </span>
+        <span>Export</span>
+      <% end %>
+    </div>
+
     <p class="has-text-grey-light users-total">Total: <%= @users.size %></p>
+
     <table class="table is-fullwidth is-hoverable">
       <thead>
         <tr>

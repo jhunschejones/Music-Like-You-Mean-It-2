@@ -67,3 +67,57 @@ body {
     width: 100%;
   }
 }
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 38px;
+  height: 23px;
+  user-select: none;
+  input {
+    opacity: 0;
+    &:checked + .slider {
+      background-color: #3298dc;
+    }
+    &:checked + .slider:before {
+      -webkit-transform: translateX(15px);
+      -ms-transform: translateX(15px);
+      transform: translateX(15px);
+    }
+    &:focus + .slider {
+      outline: -webkit-focus-ring-color auto 1px;
+      outline-color: -webkit-focus-ring-color;
+      outline-style: auto;
+      outline-width: 1px;
+    }
+  }
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+    user-select: none;
+    &:before {
+      position: absolute;
+      content: "";
+      height: 15px;
+      width: 15px;
+      left: 4px;
+      bottom: 4px;
+      background-color: white;
+      -webkit-transition: .4s;
+      transition: .4s;
+    }
+    &.round {
+      border-radius: 34px;
+      &::before {
+        border-radius: 50%;
+      }
+    }
+  }
+}

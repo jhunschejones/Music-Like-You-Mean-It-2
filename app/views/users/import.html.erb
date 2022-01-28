@@ -1,0 +1,43 @@
+<div class="static-page-container">
+  <div class="static-page-content">
+    <h1 class="title is-4">Import users</h1>
+
+    <p>
+      Prepare a CSV of users to import. The CSV collums will need to exactly match the following format. The first two columns are <strong>required</strong> to be present and the remaining columns may be left blank if desired.
+    </p>
+
+    <ul class="csv-format">
+      <li>[0]<strong>Name</strong></li>
+      <li>[1]<strong>Email</strong></li>
+      <li>[2]Site role</li>
+      <li>[3]Workshop page views</li>
+      <li>[4]Created at (mm/dd/yyyy)</li>
+      <li>[5]Updated at (mm/dd/yyyy)</li>
+    </ul>
+    <%= form_tag(upload_users_path, method: :post, multipart: true, class: "import-csv-form") do %>
+      <%= file_field_tag :csv_file %>
+
+      <div class="includes-headers-field-row">
+        <%= label_tag :csv_includes_headers, class: "switch", tabindex: "-1" do %>
+          <%= check_box_tag :csv_includes_headers, true, true %>
+          <span class="slider round"></span>
+        <% end %>
+        <span class="label-text">CSV includes headers</span>
+      </div>
+
+      <p class="inner-form-instructions">
+        The import tool will prevent the creation of duplicate users based on the first two columns of the CSV. You may also use this tool to <em>update</em> existing users for easier bulk changes.
+      </p>
+
+      <div class="overwrite-matching-users-field-row">
+        <%= label_tag :overwrite_matching_users, class: "switch", tabindex: "-1" do %>
+          <%= check_box_tag :overwrite_matching_users, true, false %>
+          <span class="slider round"></span>
+        <% end %>
+        <span class="label-text">Overwrite matching users</span>
+      </div>
+
+      <%= submit_tag("Import users", class: "button is-info", data: { controller: "disable", disable_with_value: "Importing...", action: "disable#disableButton", disable_target: "button" }) %>
+    <% end %>
+  </div>
+</div>
