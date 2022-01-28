@@ -82,23 +82,17 @@
   .title {
     margin-bottom: 8px;
   }
-  .new-email-button,
-  .send-daily-email-button {
-    .fa-spinner {
-      margin-right: 5px;
-      margin-left: -4px;
-    }
+  .actions {
+    display: inline-flex;
+    float: right;
     margin-top: -40px;
-    .large-screen-description {
-      @media screen and (max-width: 680px) {
+    .button:not(:first-child) {
+      margin-left: 8px;
+    }
+    @media screen and (max-width: 380px) {
+      .desktop-action {
         display: none;
       }
-    }
-  }
-  .send-daily-email-button {
-    margin-right: 105px;
-    @media screen and (max-width: 680px) {
-      margin-right: 70px;
     }
   }
   @media screen and (max-width: 680px) {
