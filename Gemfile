@@ -22,6 +22,7 @@ gem "sassc-rails"
 gem "font_awesome5_rails"
 gem "bulma-rails"
 gem "will_paginate"
+gem "roadie-rails"
 
 gem "bootsnap", require: false
 

@@ -72,6 +72,7 @@ Rails.application.configure do
   end
 
   config.action_mailer.default_url_options = { host: "music-like-you-mean-it-2.herokuapp.com", protocol: "https" }
+  config.roadie.url_options = { host: "music-like-you-mean-it-2.herokuapp.com", scheme: "https" }
 
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true

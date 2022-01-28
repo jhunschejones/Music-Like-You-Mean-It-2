@@ -25,9 +25,7 @@
 !/tmp/storage/
 !/tmp/storage/.keep
 
-/public/assets/*
-# commit email stylesheet on purpose
-!/public/assets/email_v1.css
+/public/assets/
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key

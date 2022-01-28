@@ -1,4 +1,6 @@
 class UserMailer < ApplicationMailer
+  include Roadie::Rails::Automatic
+
   def daily_email(email_id:, user_id:, is_test: false)
     @user = User.find(user_id)
     @email = Email.find(email_id)
