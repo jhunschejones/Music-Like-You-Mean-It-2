@@ -4,8 +4,6 @@ class SessionsController < ApplicationController
   def new
     if session[:user_id]
       redirect_to session.delete(:return_to) || blogs_path
-    else
-      render :new
     end
   end
 
@@ -23,6 +21,7 @@ class SessionsController < ApplicationController
 
   def destroy
     reset_session
-    redirect_to login_url, notice: "Succesfully logged out"
+    # https://github.com/hotwired/turbo-rails/issues/122#issuecomment-782766453
+    redirect_to login_url, notice: "Succesfully logged out", status: :see_other
   end
 end
