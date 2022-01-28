@@ -41,8 +41,8 @@ Rails.application.configure do
   # Store uploaded files on the local file system (see config/storage.yml for options).
   config.active_storage.service = :local
 
-  config.action_cable.allowed_request_origins = [ "https://music-like-you-mean-it-2.herokuapp.com/" ]
-  config.web_socket_server_url = "wss://music-like-you-mean-it-2.herokuapp.com/cable"
+  config.action_cable.allowed_request_origins = [ "https://www.musiclikeyoumeanit.com.com/" ]
+  config.web_socket_server_url = "wss://www.musiclikeyoumeanit.com.com/cable"
 
   config.session_store :cookie_store, expire_after: 14.days, key: "__Host-music_like_you_mean_it_session", secure: Rails.env.production?
 
@@ -71,8 +71,8 @@ Rails.application.configure do
     # config.active_job.queue_name_prefix = "music_like_you_mean_it_production"
   end
 
-  config.action_mailer.default_url_options = { host: "music-like-you-mean-it-2.herokuapp.com", protocol: "https" }
-  config.roadie.url_options = { host: "music-like-you-mean-it-2.herokuapp.com", scheme: "https" }
+  config.action_mailer.default_url_options = { host: "www.musiclikeyoumeanit.com.com", protocol: "https" }
+  config.roadie.url_options = { host: "www.musiclikeyoumeanit.com.com", scheme: "https" }
 
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
@@ -81,7 +81,7 @@ Rails.application.configure do
   config.action_mailer.smtp_settings = {
     address: "email-smtp.us-east-1.amazonaws.com",
     port: 587,
-    domain: "jpstudy.app",
+    domain: "musiclikeyoumeanit.com",
     user_name: ENV["SMTP_USERNAME"],
     password: ENV["SMTP_PASSWORD"],
     authentication: "login",
