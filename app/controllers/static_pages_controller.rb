@@ -11,7 +11,16 @@ class StaticPagesController < ApplicationController
   end
 
   def workshop
-    @current_user = User.find(session[:user_id])
+    @current_user =
+      if session[:user_id]
+        User.find(session[:user_id])
+      elsif params[:id]
+        User.from_workshop_key(params[:id])
+      end
+
+    return render "users/new_workshop_user" unless @current_user
+
+    session[:user_id] = @current_user.id
     @current_user.increment!(:workshop_page_views)
   rescue ActiveRecord::RecordNotFound
     render "users/new_workshop_user"

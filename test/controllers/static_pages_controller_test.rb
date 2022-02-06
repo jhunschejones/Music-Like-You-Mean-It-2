@@ -31,5 +31,19 @@ class StaticPagesControllerTest < ActionDispatch::IntegrationTest
         assert_equal 1, riley.workshop_page_views
       end
     end
+
+    describe "with a valid workshop key" do
+      test "loads the workshop page directly" do
+        get workshop_path(id: users(:site_user).workshop_key)
+        assert_response :success
+        assert_select "h2.workshop-title"
+      end
+
+      test "increments workshop_page_views for the user" do
+        assert_equal 0, users(:site_user).workshop_page_views
+        get workshop_path(id: users(:site_user).workshop_key)
+        assert_equal 1, users(:site_user).reload.workshop_page_views
+      end
+    end
   end
 end

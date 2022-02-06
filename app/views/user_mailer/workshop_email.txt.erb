@@ -2,12 +2,12 @@ Hi <%= @user.name %>,
 
 Thanks for signing up to watch the "12 Steps to Create the Best Songs of Your Career" workshop. If you are passionate about taking your music to the next level, then this is what you have been waiting for!
 
-Watch The Free Workshop: <%= workshop_url %>
+Watch The Free Workshop: <%= workshop_url(id: @user.workshop_key) %>
 
 During the workshop, I will take you through twelve of the most important decisions required to craft high quality music. I am confident you will walk away with handfuls of actionable tools that you can apply right away to start creating better music.
 
 Click below to catch the workshop now!
-<%= workshop_url %>
+<%= workshop_url(id: @user.workshop_key) %>
 
 Make sure you have your favorite notes app or a piece of paper ready, because you are going to want to take notes!
 

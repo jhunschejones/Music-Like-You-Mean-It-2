@@ -37,6 +37,10 @@ class User < ApplicationRecord
     Rails.application.message_verifier(:unsubscribe).generate(id)
   end
 
+  def workshop_key
+    Rails.application.message_verifier(:workshop).generate(id)
+  end
+
   def self.find_or_create_workshop_user(name:, email:)
     temp_password = SecureRandom.hex
     create_with(
@@ -49,6 +53,12 @@ class User < ApplicationRecord
   def self.from_unsubscribe_key(unsubscribe_key)
     find(
       Rails.application.message_verifier(:unsubscribe).verify(unsubscribe_key)
+    )
+  end
+
+  def self.from_workshop_key(workshop_key)
+    find(
+      Rails.application.message_verifier(:workshop).verify(workshop_key)
     )
   end
 
