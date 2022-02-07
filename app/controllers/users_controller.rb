@@ -37,7 +37,8 @@ class UsersController < ApplicationController
       @user = User.find_by_unsubscribe_key(params[:id])
       raise NoUnsubscribeUserFound unless @user
       session[:user_id] = @user.id
-      return redirect_to unsubscribe_path, status: :see_other
+      # TODO: Still losing the session on redirect somehow, so I don't think this will work 🤔
+      # return redirect_to unsubscribe_path, status: :see_other
     end
 
     @user = User.find(session[:user_id])

@@ -22,7 +22,9 @@ class StaticPagesController < ApplicationController
       logger.debug "Setting user id in session to '#{user_from_workshop_key.id}'"
       session[:user_id] = user_from_workshop_key.id
       logger.debug "User id set in session to '#{session[:user_id]}'"
-      return redirect_to workshop_url, status: :see_other
+      # TODO: Still losing the session on redirect somehow, so I don't think this will work 🤔
+      # return redirect_to workshop_url, status: :see_other
+      @current_user = user_from_workshop_key
     end
 
     if @current_user.nil?
