@@ -4,6 +4,7 @@ class UsersController < ApplicationController
   include DateParsing
 
   class InsecureRequest < StandardError; end
+  class NoUnsubscribeUserFound < StandardError; end
 
   skip_before_action :authenticate_admin_user, only: [:create_workshop_users, :unsubscribe, :destroy]
 
@@ -31,11 +32,19 @@ class UsersController < ApplicationController
   end
 
   def unsubscribe
-    @user = User.from_unsubscribe_key(params[:id])
-    session[:user_id] = @user.id
-  rescue
+    # Handle unsubscribe key provided via URL params first
+    if params[:id]
+      @user = User.find_by_unsubscribe_key(params[:id])
+      raise NoUnsubscribeUserFound unless @user
+      session[:user_id] = @user.id
+      return redirect_to unsubscribe_path
+    end
+
+    @user = User.find(session[:user_id])
+  rescue ActiveRecord::RecordNotFound, NoUnsubscribeUserFound
+    reset_session
     flash[:notice] = "We couldn't find you! You are either already unsubscribed, or you'll need to follow the unsubscribe link from your email again."
-    redirect_to workshop_path
+    return redirect_to workshop_path
   end
 
   def create_workshop_users

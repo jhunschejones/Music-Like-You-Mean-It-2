@@ -1,4 +1,4 @@
-require 'test_helper'
+require "test_helper"
 
 # bundle exec ruby -Itest test/controllers/users_controller_test.rb
 class UsersControllerTest < ActionDispatch::IntegrationTest
@@ -134,7 +134,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
       end
 
       test "does not create a new user" do
-        assert_no_difference 'User.count' do
+        assert_no_difference "User.count" do
           post users_path, params: { user: { name: "Riley", email: "riley@dafox.com" } }
         end
       end
@@ -152,7 +152,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
 
       describe "when a user with matching email already exists" do
         test "does not create a new user record" do
-          assert_no_difference 'User.count' do
+          assert_no_difference "User.count" do
             post users_path, params: { user: { name: users(:site_user).name, email: users(:site_user).email } }
           end
         end
@@ -160,7 +160,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
 
       describe "when a user does not exist with matching email" do
         test "creates a new user record" do
-          assert_difference 'User.count', 1 do
+          assert_difference "User.count", 1 do
             post users_path, params: { user: { name: "Riley", email: "riley@dafox.com" } }
           end
         end
@@ -171,7 +171,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
   describe "POST create_workshop_users" do
     describe "when a user with matching email already exists" do
       test "does not create a new user record" do
-        assert_no_difference 'User.count' do
+        assert_no_difference "User.count" do
           post workshop_users_path, params: { user: { name: users(:site_user).name, email: users(:site_user).email } }
         end
       end
@@ -203,7 +203,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
 
     describe "when a user does not exist with matching email" do
       test "creates a new user record" do
-        assert_difference 'User.count', 1 do
+        assert_difference "User.count", 1 do
           post workshop_users_path, params: { user: { name: "Riley", email: "riley@dafox.com" } }
         end
       end
@@ -230,8 +230,9 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
         assert_nil session[:user_id]
       end
 
-      test "redirects to workshop path" do
+      test "redirects to workshop path with message" do
         assert_redirected_to workshop_path
+        assert_equal flash[:notice], "We couldn't find you! You are either already unsubscribed, or you'll need to follow the unsubscribe link from your email again."
       end
     end
 
@@ -244,8 +245,9 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
         assert_equal users(:site_user).id, session[:user_id]
       end
 
-      test "loads unsubscribe page" do
-        assert_select 'p', /Are you sure you want to unsubscribe/
+      test "redirects to unsubscribe page" do
+        follow_redirect!
+        assert_select "p", /Are you sure you want to unsubscribe/
       end
     end
   end
@@ -253,7 +255,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
   describe "destroy" do
     describe "when there is no authenticated user" do
       test "does not destroy user" do
-        assert_no_difference 'User.count' do
+        assert_no_difference "User.count" do
           delete user_path(users(:site_user), format: :turbo_stream)
         end
       end
@@ -271,7 +273,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
       end
 
       test "does not destroy user" do
-        assert_no_difference 'User.count' do
+        assert_no_difference "User.count" do
           delete user_path(users(:site_admin), format: :turbo_stream)
         end
       end
@@ -290,7 +292,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
       end
 
       test "destroys the user" do
-        assert_difference 'User.count', -1 do
+        assert_difference "User.count", -1 do
           delete user_path(users(:site_user), format: :turbo_stream)
         end
       end
@@ -308,7 +310,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
       end
 
       test "destroys the target user" do
-        assert_difference 'User.count', -1 do
+        assert_difference "User.count", -1 do
           delete user_path(users(:site_user), format: :turbo_stream)
         end
       end

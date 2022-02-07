@@ -34,11 +34,17 @@ class User < ApplicationRecord
   end
 
   def unsubscribe_key
-    Rails.application.message_verifier(:unsubscribe).generate(id)
+    Rails.application.message_verifier(:unsubscribe).generate({
+      id: id,
+      created_at: Time.now.utc.to_s
+    })
   end
 
   def workshop_key
-    Rails.application.message_verifier(:workshop).generate(id)
+    Rails.application.message_verifier(:workshop).generate({
+      id: id,
+      created_at: Time.now.utc.to_s
+    })
   end
 
   def self.find_or_create_workshop_user(name:, email:)
@@ -50,16 +56,22 @@ class User < ApplicationRecord
     ).find_or_create_by(email: email)
   end
 
-  def self.from_unsubscribe_key(unsubscribe_key)
-    find(
-      Rails.application.message_verifier(:unsubscribe).verify(unsubscribe_key)
-    )
+  # Returns a user or nil
+  def self.find_by_unsubscribe_key(unsubscribe_key)
+    decrypted = Rails.application.message_verifier(:unsubscribe).verify(unsubscribe_key)
+    user_id = decrypted.is_a?(Hash) ? decrypted.fetch(:id) : decrypted
+    find_by(id: user_id)
+  rescue ActiveSupport::MessageVerifier::InvalidSignature
+    nil
   end
 
-  def self.from_workshop_key(workshop_key)
-    find(
-      Rails.application.message_verifier(:workshop).verify(workshop_key)
-    )
+  # Returns a User or nil
+  def self.find_by_workshop_key(workshop_key)
+    decrypted = Rails.application.message_verifier(:workshop).verify(workshop_key)
+    user_id = decrypted.is_a?(Hash) ? decrypted.fetch(:id) : decrypted
+    find_by(id: user_id)
+  rescue ActiveSupport::MessageVerifier::InvalidSignature
+    nil
   end
 
   private
