@@ -19,13 +19,13 @@ class StaticPagesController < ApplicationController
         flash.now[:notice] = "Sorry, but we couldn't find your workshop! Please follow the link from your email or enter your information on the signup form."
         return render "users/new_workshop_user"
       end
-      logger.debug "Setting user id in session to #{user_from_workshop_key.id}"
+      logger.info "Setting user id in session to #{user_from_workshop_key.id}"
       session[:user_id] = user_from_workshop_key.id
       return redirect_to workshop_path
     end
 
     unless @current_user
-      logger.debug "Couldn't find current user with id #{session[:user_id]}"
+      logger.info "Couldn't find current user with id #{session[:user_id]}"
       return render "users/new_workshop_user"
     end
 
