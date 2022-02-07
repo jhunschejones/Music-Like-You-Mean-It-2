@@ -2,7 +2,7 @@ class SessionsController < ApplicationController
   skip_before_action :authenticate_admin_user
 
   def new
-    if session[:user_id]
+    if @current_user
       redirect_to session.delete(:return_to) || blogs_path
     end
   end

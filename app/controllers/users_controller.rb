@@ -37,7 +37,7 @@ class UsersController < ApplicationController
       @user = User.find_by_unsubscribe_key(params[:id])
       raise NoUnsubscribeUserFound unless @user
       session[:user_id] = @user.id
-      # return redirect_to unsubscribe_path
+      return redirect_to unsubscribe_path
     end
 
     @user = User.find(session[:user_id])
@@ -61,7 +61,7 @@ class UsersController < ApplicationController
 
   def destroy
     # user is authenticated automatically when they go to the unsubscribe page
-    @authenticated_user = User.find(session[:user_id])
+    @authenticated_user = @current_user
     @user_to_delete = User.find(params[:id])
     secure_request!
     @user_to_delete.destroy!
