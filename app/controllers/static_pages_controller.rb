@@ -12,7 +12,7 @@ class StaticPagesController < ApplicationController
 
   def workshop
     # Handle workshop key provided via URL params first
-    if params[:id]
+    if params[:id].present?
       user_from_workshop_key = User.find_by_workshop_key(params[:id])
       if user_from_workshop_key.nil?
         reset_session
@@ -24,7 +24,7 @@ class StaticPagesController < ApplicationController
       return redirect_to workshop_path
     end
 
-    unless @current_user
+    if @current_user.nil?
       logger.info "Couldn't find current user with id #{session[:user_id]}"
       return render "users/new_workshop_user"
     end
