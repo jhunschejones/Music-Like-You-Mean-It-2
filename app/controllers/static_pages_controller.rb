@@ -21,7 +21,7 @@ class StaticPagesController < ApplicationController
       end
       logger.info "Setting user id in session to #{user_from_workshop_key.id}"
       session[:user_id] = user_from_workshop_key.id
-      return redirect_to workshop_path
+      return redirect_to workshop_path, status: :see_other
     end
 
     if @current_user.nil?

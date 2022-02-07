@@ -65,7 +65,7 @@ Rails.application.configure do
     size: 25.megabytes
   }
 
-  unless ENV['DISABLE_SIDEKIQ']
+  unless ENV["DISABLE_SIDEKIQ"]
     # Use a real queuing backend for Active Job (and separate queues per environment).
     config.active_job.queue_adapter = :sidekiq
     # config.active_job.queue_name_prefix = "music_like_you_mean_it_production"
