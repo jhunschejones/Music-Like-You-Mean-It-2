@@ -44,7 +44,7 @@ class UsersController < ApplicationController
   rescue ActiveRecord::RecordNotFound, NoUnsubscribeUserFound
     reset_session
     flash[:notice] = "We couldn't find you! You are either already unsubscribed, or you'll need to follow the unsubscribe link from your email again."
-    return redirect_to workshop_path
+    redirect_to workshop_path
   end
 
   def create_workshop_users

@@ -49,6 +49,7 @@ class StaticPagesControllerTest < ActionDispatch::IntegrationTest
           test "increments workshop_page_views for the user" do
             assert_equal 0, users(:site_user).workshop_page_views
             get workshop_path(id: users(:site_user).workshop_key)
+            follow_redirect!
             assert_equal 1, users(:site_user).reload.workshop_page_views
           end
         end

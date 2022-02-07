@@ -16,7 +16,7 @@ class StaticPagesController < ApplicationController
       user_from_workshop_key = User.find_by_workshop_key(params[:id])
       if user_from_workshop_key
         session[:user_id] = user_from_workshop_key.id
-        # redirect_to workshop_path
+        return redirect_to workshop_path
       else
         reset_session
         flash.now[:notice] = "Sorry, but we couldn't find your workshop! Please follow the link from your email or enter your information on the signup form."
