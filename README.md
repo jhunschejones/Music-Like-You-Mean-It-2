@@ -1,24 +1,8 @@
-# README
+# Music Like You Mean It 2
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Music Like You Mean It is a CMS and blog I created for an online music production training project I've been adding to off and on. It started as a Rails 6 app (archived [here](https://github.com/jhunschejones/Music-Like-You-Mean-It)) and has now been upgraded to take advantage of some of the improved tooling in Rails 7.
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+### Updates Since V1
+* Better token code and abstraction
+* New email provider
+* Content import / export
