@@ -1,1 +1,1 @@
-Sidekiq.default_worker_options = { retry: 3 }
+Sidekiq.default_job_options = { retry: 3 }
